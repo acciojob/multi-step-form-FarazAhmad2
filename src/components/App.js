@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./../styles/App.css";
 import Step from "./Step";
 
@@ -32,6 +32,10 @@ const App = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
   };
+
+  useEffect(() => {
+    console.log('Current step:', step);
+  }, [step]);
 
   return (
     <div>
