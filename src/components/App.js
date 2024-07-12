@@ -36,22 +36,7 @@ const App = () => {
   return (
     <div>
       <form onSubmit={step === 3 ? handleSubmit : (e) => e.preventDefault()}>
-        <Step step={step} handleChange={handleChange} formData={formData} />
-        {step !== 1 && (
-          <button onClick={prevStep} type="button">
-            Back
-          </button>
-        )}
-        {step !== 3 && (
-          <button onClick={nextStep} type="button">
-            Next
-          </button>
-        )}
-        {step === 3 && (
-          <button type="submit">
-            Submit
-          </button>
-        )}
+        <Step step={step} handleChange={handleChange} formData={formData} nextStep={nextStep} prevStep={prevStep} />
       </form>
     </div>
   );

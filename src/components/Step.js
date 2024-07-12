@@ -1,6 +1,6 @@
 import React from "react";
 
-const Step = ({ step, handleChange, formData }) => {
+const Step = ({ step, handleChange, formData, nextStep, prevStep }) => {
   if (step === 1) {
     return (
       <div id='step1' className="customer container">
@@ -9,6 +9,9 @@ const Step = ({ step, handleChange, formData }) => {
         <input onChange={handleChange} id="first_name" name="first_name" value={formData.first_name} />
         <label htmlFor="last_name">Last Name:</label>
         <input onChange={handleChange} id="last_name" name="last_name" value={formData.last_name} />
+        <div className="btns">
+        <button onClick={nextStep} type="button">Next</button>
+        </div>
       </div>
     );
   } else if (step === 2) {
@@ -19,6 +22,10 @@ const Step = ({ step, handleChange, formData }) => {
         <input onChange={handleChange} id="model" name="model" value={formData.model} />
         <label htmlFor="car_price">Price:</label>
         <input onChange={handleChange} type="number" id="car_price" name="car_price" value={formData.car_price} />
+        <div className="btns">
+        <button onClick={prevStep} type="button">Back</button>
+        <button onClick={nextStep} type="button">Next</button>
+        </div>
       </div>
     );
   } else if (step === 3) {
@@ -29,6 +36,10 @@ const Step = ({ step, handleChange, formData }) => {
         <input type="number" onChange={handleChange} id="card_info" name="card_info" value={formData.card_info} />
         <label htmlFor="expiry_date">Expiration Date:</label>
         <input onChange={handleChange} type="date" id="expiry_date" name="expiry_date" value={formData.expiry_date} />
+        <div className="btns">
+        <button onClick={prevStep} type="button">Back</button>
+        <button type="submit">Submit</button>
+        </div>
       </div>
     );
   } else {
