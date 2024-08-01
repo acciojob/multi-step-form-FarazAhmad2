@@ -38,11 +38,10 @@ const App = () => {
   }, [step]);
 
   return (
-    <div id="step1">
-      <form id="step2" onSubmit={step === 3 ? handleSubmit : (e) => e.preventDefault()}>
+    <div>
+      <form id={`step${step}`} onSubmit={step === 3 ? handleSubmit : (e) => e.preventDefault()}>
         <Step step={step} handleChange={handleChange} formData={formData} nextStep={nextStep} prevStep={prevStep} />
       </form>
-      <p id="step3"></p>
     </div>
   );
 };
