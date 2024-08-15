@@ -1,52 +1,36 @@
-// SGN 
 import React, { useState } from 'react';
-import '../styles/App.css'; // Ensure the correct path
-import Step from './Step';
+import Step from './Step'; // Make sure to adjust the import path
+import './../styles/App.css'
+ 
 
-const App = () => {
+ 
+const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    model: '',
-    car_price: '',
-    card_info: '',
-    expiry_date: ''
-  });
-
-  const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+ 
+  const nextStep = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
   };
-
-  const handlePrev = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
+ 
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
   };
-
-  const handleSubmit = () => {
-    console.log('Submitted:', formData);
+ 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted successfully!');
   };
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value
-    });
-  };
-
+ 
   return (
-    <div>
-      {/* Do not remove the main div */}
-      <Step
-        currentStep={currentStep}
-        formData={formData}
-        handleChange={handleChange}
-        onNext={handleNext}
-        onPrev={handlePrev}
-        onSubmit={handleSubmit}
-      />
-    </div>
+    <form id="multiStepForm" onSubmit={handleSubmit}>
+      <Step stepNumber={1} currentStep={currentStep} onNext={nextStep} onPrev={prevStep} />
+      <Step stepNumber={2} currentStep={currentStep} onNext={nextStep} onPrev={prevStep} />
+      <Step stepNumber={3} currentStep={currentStep} onNext={nextStep} onPrev={prevStep} />
+    </form>
   );
 };
-
-export default App;
+ 
+export default MultiStepForm;

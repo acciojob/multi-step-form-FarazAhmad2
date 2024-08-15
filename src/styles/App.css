@@ -1,72 +1,50 @@
-div {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Step headers */
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  /* Form field styling */
-  label {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
     display: block;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="date"] {
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
     width: 100%;
     padding: 8px;
-    margin-top: 4px;
     margin-bottom: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  input[type="date"]:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  /* Error message styling */
-  p {
-    color: red;
-    font-size: 14px;
-    margin: 0;
-  }
-  
-  /* Button styling */
-  button {
-    padding: 10px 15px;
-    margin: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
     border: none;
     border-radius: 4px;
-    color: #fff;
-    background-color: #007bff;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #0056b3;
-  }
-  
-  /* Navigation buttons styling */
-  button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
+}
