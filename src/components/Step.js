@@ -1,50 +1,139 @@
-import React from "react";
+// SGN 
+import React, { useState } from 'react';
 
-const Step = ({ step, handleChange, formData, nextStep, prevStep }) => {
-  if (step === 1) {
-    return (
-      <div className="customer container">
-        <h1>Customer Details</h1>
-        <label htmlFor="first_name">First Name:</label>
-        <input onChange={handleChange} id="first_name" name="first_name" value={formData.first_name} />
-        <label htmlFor="last_name">Last Name:</label>
-        <input onChange={handleChange} id="last_name" name="last_name" value={formData.last_name} />
-        <div className="btns">
-        <button onClick={nextStep} type="button">Next</button>
+const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit }) => {
+  const [creditCardError, setCreditCardError] = useState('');
+  const [expiryDateError, setExpiryDateError] = useState('');
+
+  const handleCreditCardNumberChange = (event) => {
+    const value = event.target.value;
+    handleChange(event);
+    
+    // Validate credit card number
+    if (value.replace(/\D/g, '').length === 12) {
+      setCreditCardError('');
+    } else {
+      setCreditCardError('Credit card number must be exactly 12 digits');
+    }
+  };
+
+  const handleExpiryDateChange = (event) => {
+    const value = event.target.value;
+    handleChange(event);
+    
+    // Validate expiry date format
+    const regex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+    if (regex.test(value)) {
+      setExpiryDateError('');
+    } else {
+      setExpiryDateError('Please enter a valid MM/YY date');
+    }
+  };
+
+  const isStep1 = currentStep === 1;
+  const isStep2 = currentStep === 2;
+  const isStep3 = currentStep === 3;
+
+  return (
+    <div>
+      {isStep1 && (
+        <div>
+          <h2>Customer Details</h2>
+          <label>
+            First Name:
+            <input
+              type="text"
+              id="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              placeholder="First Name"
+            />
+          </label>
+          <br />
+          <label>
+            Last Name:
+            <input
+              type="text"
+              id="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              placeholder="Last Name"
+            />
+          </label>
+          <br />
+          <button onClick={onNext}>Next</button>
         </div>
-      </div>
-    );
-  } else if (step === 2) {
-    return (
-      <div className="car container">
-        <h1>Car Details</h1>
-        <label htmlFor="model">Model:</label>
-        <input onChange={handleChange} id="model" name="model" value={formData.model} />
-        <label htmlFor="car_price">Price:</label>
-        <input onChange={handleChange} type="number" id="car_price" name="car_price" value={formData.car_price} />
-        <div className="btns">
-        <button onClick={prevStep} type="button">Back</button>
-        <button onClick={nextStep} type="button">Next</button>
+      )}
+
+      {isStep2 && (
+        <div>
+          <h2>Car Details</h2>
+          <label>
+            Car Model:
+            <input
+              type="text"
+              id="model"
+              value={formData.model}
+              onChange={handleChange}
+              placeholder="Car Model"
+            />
+          </label>
+          <br />
+          <label>
+            Car Price:
+            <input
+              type="text"
+              id="car_price"
+              value={formData.car_price}
+              onChange={handleChange}
+              placeholder="Car Price"
+            />
+          </label>
+          <br />
+          <button onClick={onPrev}>Previous</button>
+          <button onClick={onNext}>Next</button>
         </div>
-      </div>
-    );
-  } else if (step === 3) {
-    return (
-      <div className="payment container">
-        <h1>Payment Details</h1>
-        <label htmlFor="card_info">Credit Card Number:</label>
-        <input type="number" onChange={handleChange} id="card_info" name="card_info" value={formData.card_info} />
-        <label htmlFor="expiry_date">Expiration Date:</label>
-        <input onChange={handleChange} type="date" id="expiry_date" name="expiry_date" value={formData.expiry_date} />
-        <div className="btns">
-        <button onClick={prevStep} type="button">Back</button>
-        <button type="submit">Submit</button>
+      )}
+
+      {isStep3 && (
+        <div>
+          <h2>Payment Details</h2>
+          <label>
+            Credit Card Number:
+            <input
+              type="text"
+              id="card_info"
+              placeholder="Enter 12-digit number"
+              value={formData.card_info}
+              onChange={handleCreditCardNumberChange}
+            />
+            {creditCardError && <p style={{ color: 'red' }}>{creditCardError}</p>}
+          </label>
+          <br />
+          <label>
+            Expiration Date (MM/YY):
+            <input
+              type="text"
+              id="expiry_date"
+              placeholder="MM/YY"
+              value={formData.expiry_date}
+              onChange={handleExpiryDateChange}
+            />
+            {expiryDateError && <p style={{ color: 'red' }}>{expiryDateError}</p>}
+          </label>
+          <br />
+          <button onClick={onPrev}>Previous</button>
+          <button
+            onClick={() => {
+              if (!creditCardError && !expiryDateError) onSubmit();
+            }}
+          >
+            Submit
+          </button>
         </div>
-      </div>
-    );
-  } else {
-    return null;
-  }
+      )}
+    </div>
+  );
 };
 
 export default Step;
