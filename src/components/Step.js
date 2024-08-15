@@ -37,7 +37,7 @@ const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit })
   return (
     <div>
       {isStep1 && (
-        <div>
+        <div id='step1'>
           <h2>Customer Details</h2>
           <label>
             First Name:
@@ -66,7 +66,7 @@ const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit })
       )}
 
       {isStep2 && (
-        <div>
+        <div id='step2'>
           <h2>Car Details</h2>
           <label>
             Car Model:
@@ -96,7 +96,7 @@ const Step = ({ currentStep, formData, handleChange, onNext, onPrev, onSubmit })
       )}
 
       {isStep3 && (
-        <div>
+        <div id='step3'>
           <h2>Payment Details</h2>
           <label>
             Credit Card Number:
